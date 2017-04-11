@@ -1,2 +1,2 @@
 # Kattis
-my solutions to problems from https://open.kattis.com
+my solutions to the problems from https://open.kattis.com
