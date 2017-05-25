@@ -1,32 +1,33 @@
+#https://open.kattis.com/problems/phonelist
 from sys import stdin
 tests = int(stdin.readline())
 
+def is_in(num):
+    for i in range(1, len(num)):
+        if num[:i] in phonebook_set:
+            return True
+
+    return False
+             
+
 for test in range(tests):
     lines = int(stdin.readline())
-    phonebook = {
-        1: set(),
-        2: set(),
-        3: set(),
-        4: set(),
-        5: set(),
-        6: set(),
-        7: set(),
-        8: set(),
-        9: set(),
-        10: set(),}
-        
+    phonebook = []
+    phonebook_set = set()
+    
     for num in range(lines):
         num = stdin.readline().strip()
+        phonebook.append(num)
+        phonebook_set.add(num)
 
-        found = False
-        for i in range(1, len(num)):
-            if num[:i] in phonebook[i]:
-                print("NO")
-                found = True
-                break
+    phonebook = sorted(phonebook, key=len, reverse=True)
+    
+    #check list from longest to smallest if they in set of all nums
+    #checks every length of num from 1 to len(num)
+    for idx, num in enumerate(phonebook):
+        if is_in(num):
+            print("NO")
+            break
 
-        if not found:
-            phonebook[len(num)].add(num)
-            
-    if not found:
+    if idx == len(phonebook) -1:
         print("YES")
