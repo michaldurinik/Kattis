@@ -1,28 +1,32 @@
-import sys
-no_samples = sys.stdin.readline()
+from sys import stdin
+tests = int(stdin.readline())
 
-i = 0
-while i < int(no_samples):
-    found = False
-    number_count = int(sys.stdin.readline())
-    seen = set()
+for test in range(tests):
+    lines = int(stdin.readline())
+    phonebook = {
+        1: set(),
+        2: set(),
+        3: set(),
+        4: set(),
+        5: set(),
+        6: set(),
+        7: set(),
+        8: set(),
+        9: set(),
+        10: set(),}
+        
+    for num in range(lines):
+        num = stdin.readline().strip()
 
-    for line in range(number_count):
-        line = sys.stdin.readline().strip()
+        found = False
+        for i in range(1, len(num)):
+            if num[:i] in phonebook[i]:
+                print("NO")
+                found = True
+                break
 
         if not found:
-            for idx in range(1, len(line)+1):
-                if line[:idx] in seen:
-                    found = True
-                    print("NO")
-                    break
-                    
-            seen.add(line)
+            phonebook[len(num)].add(num)
             
-        else:
-            break
-
     if not found:
         print("YES")
-    
-    i += 1  
